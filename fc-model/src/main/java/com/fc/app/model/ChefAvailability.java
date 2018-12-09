@@ -37,7 +37,7 @@ public class ChefAvailability {
 	
 	@OneToOne
 	@JoinColumn(name = "SLOT_ID")
-	private ChefSlot slot;
+	private RefChefSlot slot;
 
 	@Column(name = "CREATED_ON")
 	@CreationTimestamp
@@ -80,11 +80,11 @@ public class ChefAvailability {
 		this.date = date;
 	}
 	
-	public ChefSlot getSlot() {
+	public RefChefSlot getSlot() {
 		return slot;
 	}
 
-	public void setSlot(ChefSlot slot) {
+	public void setSlot(RefChefSlot slot) {
 		this.slot = slot;
 	}
 

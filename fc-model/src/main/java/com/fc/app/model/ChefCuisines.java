@@ -31,7 +31,7 @@ public class ChefCuisines {
 
 	@OneToOne
 	@JoinColumn(name = "CUISINE_ID")
-	private Cuisine cuisine;
+	private RefCuisine cuisine;
 
 	@CreationTimestamp
 	@Column(name = "CREATED_ON")
@@ -48,11 +48,11 @@ public class ChefCuisines {
 		this.chefId = chefId;
 	}
 
-	public Cuisine getCuisine() {
+	public RefCuisine getCuisine() {
 		return cuisine;
 	}
 
-	public void setCuisine(Cuisine cuisine) {
+	public void setCuisine(RefCuisine cuisine) {
 		this.cuisine = cuisine;
 	}
 

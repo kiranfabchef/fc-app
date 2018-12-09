@@ -14,7 +14,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = FcTableNames.TABLE_REF_CHEF_SLOTS)
-public class ChefSlot {
+public class RefChefSlot {
 
 	@Id
 	@Column(name = "SLOT_ID")

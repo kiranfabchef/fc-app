@@ -7,7 +7,7 @@ public class FcTableNames {
 	public static final String TABLE_CHEF_AVAILABILITY = "T_FC_CHEF_AVAILABILITY";
 	
 	
-	public static final String TABLE_CUISINE = "T_FC_REF_CUISINE";
+	public static final String TABLE_REF_CUISINE = "T_FC_REF_CUISINE";
 	public static final String TABLE_CHEF_CUISINE = "T_FC_CHEF_CUISINE";
 	public static final String TABLE_CHEF_RECIPE = "T_FC_CHEF_RECIPE";
 	
@@ -15,5 +15,8 @@ public class FcTableNames {
 	public static final String TABLE_REF_STATICDATA = "T_FC_REF_STATICDATA";
 	
 	public static final String TABLE_CUSTOMER = "T_FC_CUSTOMER";
+	public static final String TABLE_REF_VENUE_DETAILS = "T_FC_REF_VENUE_DETAILS";
+	public static final String TABLE_REF_PACKAGE_TYPES = "T_FC_REF_PACKAGE_TYPES";
+	public static final String TABLE_REF_PAYMENT_METHODS = "T_FC_REF_PAYMENT_METHODS";
 
 }
