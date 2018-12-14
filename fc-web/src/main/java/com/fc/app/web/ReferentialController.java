@@ -15,10 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fc.app.model.RefChefSlot;
 import com.fc.app.model.RefCuisine;
+import com.fc.app.model.RefPackageTypes;
+import com.fc.app.model.RefPaymentMethods;
 import com.fc.app.model.RefCategoryTypes;
 import com.fc.app.model.RefStaticData;
 import com.fc.app.model.RefVenueDetails;
 import com.fc.app.service.RefCuisineService;
+import com.fc.app.service.RefPackageTypesService;
+import com.fc.app.service.RefPaymentMethodsService;
 import com.fc.app.service.RefCategoryTypesService;
 import com.fc.app.service.RefChefSlotService;
 import com.fc.app.service.RefStaticDataService;
@@ -48,6 +52,158 @@ public class ReferentialController {
 	
 	@Autowired
 	private RefVenueDetailsService venueService;
+	
+	@Autowired
+	private RefPackageTypesService packageTypesService;
+	
+	@Autowired
+	private RefPaymentMethodsService paymentMethodsService;
+	
+	//Payment Methods
+	@ApiOperation(value = "create a payment method", response = RefPaymentMethods.class)
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully created a payment method"),
+			@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+			@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
+	@RequestMapping(path = "/payment-methods", method = RequestMethod.POST)
+	public ResponseEntity<RefPaymentMethods> create(@RequestBody RefPaymentMethods paymentMethods) {
+		ResponseEntity<RefPaymentMethods> response = null;
+		RefPaymentMethods paymentMethodCreated = paymentMethodsService.save(paymentMethods);
+		response = new ResponseEntity<>(paymentMethodCreated , HttpStatus.OK);
+		return response;
+	}
+
+	@ApiOperation(value = "Update the payment method", response = RefPaymentMethods.class)
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully updated the payment method"),
+			@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+			@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
+	@RequestMapping(path = "/payment-methods", method = RequestMethod.PUT)
+	public ResponseEntity<RefPaymentMethods> update(@RequestBody RefPaymentMethods venue) {
+		ResponseEntity<RefPaymentMethods> response = null;
+		RefPaymentMethods paymentMethodsModified = paymentMethodsService.save(venue);
+		response = new ResponseEntity<>(paymentMethodsModified, HttpStatus.OK);
+		return response;
+	}
+
+	@ApiOperation(value = "Fetch the payment method by id", response = RefPaymentMethods.class)
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully fetched the venue"),
+			@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+			@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
+	@RequestMapping(path = "/payment-methods/{id}", method = RequestMethod.GET)
+	public ResponseEntity<RefPaymentMethods> getPaymentMethod(@PathVariable("id") Long id) {
+		ResponseEntity<RefPaymentMethods> response = null;
+		RefPaymentMethods packageType = null;
+		Optional<RefPaymentMethods> venueOptional = paymentMethodsService.getPaymentMethodById(id);
+		if (venueOptional.isPresent()) {
+			packageType = venueOptional.get();
+		}
+		response = new ResponseEntity<>(packageType, HttpStatus.OK);
+		return response;
+	}
+
+	@ApiOperation(value = "Fetch the list of payment methods", response = Iterable.class)
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully retrieved list"),
+			@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+			@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
+
+	@RequestMapping(path = "/payment-methods/fetch-all", method = RequestMethod.GET)
+	public ResponseEntity<List<RefPaymentMethods>> fetchAllPaymentMethods() {
+		ResponseEntity<List<RefPaymentMethods>> response = null;
+		List<RefPaymentMethods> paymentMethods = paymentMethodsService.getAllPaymentMethods();
+		response = new ResponseEntity<>(paymentMethods, HttpStatus.OK);
+		return response;
+	}
+
+	@ApiOperation(value = "Fetch the list of payment methods for the given criteria", response = Iterable.class)
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully retrieved list"),
+			@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+			@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
+
+	@RequestMapping(path = "/payment-methods/search", method = RequestMethod.POST)
+	public ResponseEntity<List<RefPaymentMethods>> fetchAllPaymentMethods(
+			@RequestBody RefPaymentMethods paymentMethod) {
+		ResponseEntity<List<RefPaymentMethods>> response = null;
+		List<RefPaymentMethods> paymentMethods = paymentMethodsService.getAllPaymentMethodsByExample(paymentMethod);
+		response = new ResponseEntity<>(paymentMethods, HttpStatus.OK);
+		return response;
+	}
+	
+	//Package types
+		@ApiOperation(value = "create a package type", response = RefPackageTypes.class)
+		@ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully created a package type"),
+				@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+				@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+				@ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
+		@RequestMapping(path = "/package-types", method = RequestMethod.POST)
+		public ResponseEntity<RefPackageTypes> create(@RequestBody RefPackageTypes packageType) {
+			ResponseEntity<RefPackageTypes> response = null;
+			RefPackageTypes packageTypeCreated = packageTypesService.save(packageType);
+			response = new ResponseEntity<>(packageTypeCreated , HttpStatus.OK);
+			return response;
+		}
+
+		@ApiOperation(value = "Update the package type", response = RefPackageTypes.class)
+		@ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully updated the package type"),
+				@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+				@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+				@ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
+		@RequestMapping(path = "/package-types", method = RequestMethod.PUT)
+		public ResponseEntity<RefPackageTypes> update(@RequestBody RefPackageTypes venue) {
+			ResponseEntity<RefPackageTypes> response = null;
+			RefPackageTypes packageTypesModified = packageTypesService.save(venue);
+			response = new ResponseEntity<>(packageTypesModified, HttpStatus.OK);
+			return response;
+		}
+
+		@ApiOperation(value = "Fetch the package type by id", response = RefVenueDetails.class)
+		@ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully fetched the venue"),
+				@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+				@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+				@ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
+		@RequestMapping(path = "/package-types/{id}", method = RequestMethod.GET)
+		public ResponseEntity<RefPackageTypes> getPackageType(@PathVariable("id") Long id) {
+			ResponseEntity<RefPackageTypes> response = null;
+			RefPackageTypes packageType = null;
+			Optional<RefPackageTypes> venueOptional = packageTypesService.getPackageTypesById(id);
+			if (venueOptional.isPresent()) {
+				packageType = venueOptional.get();
+			}
+			response = new ResponseEntity<>(packageType, HttpStatus.OK);
+			return response;
+		}
+
+		@ApiOperation(value = "Fetch the list of package type", response = Iterable.class)
+		@ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully retrieved list"),
+				@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+				@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+				@ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
+
+		@RequestMapping(path = "/package-types/fetch-all", method = RequestMethod.GET)
+		public ResponseEntity<List<RefPackageTypes>> fetchAllPackageTypes() {
+			ResponseEntity<List<RefPackageTypes>> response = null;
+			List<RefPackageTypes> packageTypes = packageTypesService.getAllPackageTypes();
+			response = new ResponseEntity<>(packageTypes, HttpStatus.OK);
+			return response;
+		}
+
+		@ApiOperation(value = "Fetch the list of package type for the given criteria", response = Iterable.class)
+		@ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully retrieved list"),
+				@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+				@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+				@ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
+
+		@RequestMapping(path = "/package-types/search", method = RequestMethod.POST)
+		public ResponseEntity<List<RefPackageTypes>> fetchAllPackageTypes(
+				@RequestBody RefPackageTypes venue) {
+			ResponseEntity<List<RefPackageTypes>> response = null;
+			List<RefPackageTypes> packageTypes = packageTypesService.getAllPackageTypesByExample(venue);
+			response = new ResponseEntity<>(packageTypes, HttpStatus.OK);
+			return response;
+		}
 	
 	//Venue details
 	@ApiOperation(value = "create a venue", response = RefVenueDetails.class)
