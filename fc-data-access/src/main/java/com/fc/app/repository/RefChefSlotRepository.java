@@ -8,4 +8,6 @@ import com.fc.app.model.RefChefSlot;
 @Repository
 public interface RefChefSlotRepository extends JpaRepository<RefChefSlot, Long> {
 
+	RefChefSlot findBySlotId(Long slotId);
+
 }

@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import com.fc.app.model.Chef;
 
-
 public interface ChefService {
 	
 	public List<Chef> getAllChefs();

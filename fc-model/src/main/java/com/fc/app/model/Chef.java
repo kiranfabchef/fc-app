@@ -1,18 +1,22 @@
 package com.fc.app.model;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
@@ -93,6 +97,10 @@ public class Chef {
 	@JsonManagedReference
 	private List<ChefAvailability> chefAvailability;*/
 
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="chef")
+	@JsonManagedReference
+	private List<ChefCuisines> chefCuisines;
+	
 	public Long getId() {
 		return id;
 	}
@@ -279,6 +287,14 @@ public class Chef {
 		this.chefLinkedinLink = chefLinkedinLink;
 	}
 	
+	public List<ChefCuisines> getChefCuisines() {
+		return chefCuisines;
+	}
+
+	public void setChefCuisines(List<ChefCuisines> chefCuisines) {
+		this.chefCuisines = chefCuisines;
+	}
+
 	@Override
 	public String toString() {
 		return "Chef [id=" + id + ", userName=" + userName + ", password=" + password + ", chefFullName=" + chefFullName

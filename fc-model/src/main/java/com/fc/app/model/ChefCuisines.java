@@ -13,21 +13,23 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = FcTableNames.TABLE_CHEF_CUISINE)
 public class ChefCuisines {
-	@Id
-	@Column(name = "ID")
+	
+  @Id
+	@Column(name = "CHEF_CUISINE_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@ManyToOne
 	@JoinColumn(name = "CHEF_ID", nullable = false)
 	@JsonBackReference
-	private Chef chefId;
+	private Chef chef;
 
 	@OneToOne
 	@JoinColumn(name = "CUISINE_ID")
@@ -39,13 +41,51 @@ public class ChefCuisines {
 	
 	@Column(name = "CREATED_BY")
 	private String createdBy;
+	
+	@Column(name = "UPDATED_ON")
+	@UpdateTimestamp 
+	private Date updatedOn;
 
-	public Chef getChefId() {
-		return chefId;
+	@Column(name = "UPDATED_BY")
+	private String updatedBy;
+
+	@Column(name = "ACTIVE_FLAG")
+	private Character activeFlag;
+
+	public Chef getChef() {
+		return chef;
 	}
 
-	public void setChefId(Chef chefId) {
-		this.chefId = chefId;
+	public void setChef(Chef chef) {
+		this.chef = chef;
+	}
+
+	public Date getUpdatedOn() {
+		return updatedOn;
+	}
+
+	public void setUpdatedOn(Date updatedOn) {
+		this.updatedOn = updatedOn;
+	}
+
+	public String getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public Character getActiveFlag() {
+		return activeFlag;
+	}
+
+	public void setActiveFlag(Character activeFlag) {
+		this.activeFlag = activeFlag;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public RefCuisine getCuisine() {
@@ -78,8 +118,9 @@ public class ChefCuisines {
 
 	@Override
 	public String toString() {
-		return "ChefCuisines [id=" + id + ", chefId=" + chefId + ", cuisine=" + cuisine + ", createdOn=" + createdOn
-				+ ", createdBy=" + createdBy + "]";
+		return "ChefCuisines [id=" + id + ", chef=" + chef + ", cuisine=" + cuisine + ", createdOn=" + createdOn
+				+ ", createdBy=" + createdBy + ", updatedOn=" + updatedOn + ", updatedBy=" + updatedBy + ", activeFlag="
+				+ activeFlag + "]";
 	}
 	
 	

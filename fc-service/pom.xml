@@ -18,5 +18,10 @@
 			<artifactId>fc-data-access</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>com.fc.app</groupId>
+			<artifactId>fc-commons</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 </project>

@@ -27,10 +27,12 @@ public class ChefAvailability {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long chefAvailabilityId;
 	
-	@ManyToOne
+	/*@ManyToOne
 	@JoinColumn(name = "CHEF_ID", nullable = false)
-	@JsonBackReference
-	private Chef chefId;
+	@JsonBackReference*/
+	
+	@Column(name = "CHEF_ID")
+	private Long chefId;
 	
 	@Column(name = "DATE")
 	private Date date;
@@ -64,11 +66,11 @@ public class ChefAvailability {
 		this.chefAvailabilityId = chefAvailabilityId;
 	}
 
-	public Chef getChefId() {
+	public Long getChefId() {
 		return chefId;
 	}
 
-	public void setChefId(Chef chefId) {
+	public void setChefId(Long chefId) {
 		this.chefId = chefId;
 	}
 

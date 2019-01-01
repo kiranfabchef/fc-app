@@ -16,5 +16,7 @@ public interface RefChefSlotService {
 	public RefChefSlot save(RefChefSlot chefSlot);
 
 	public List<RefChefSlot> saveAll(Iterable<RefChefSlot> chefSlotList);
+	
+	public RefChefSlot getRefChefSlotBySlotId(Long slotId);
 
 }

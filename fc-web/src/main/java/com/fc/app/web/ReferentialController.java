@@ -28,6 +28,7 @@ import com.fc.app.service.RefChefSlotService;
 import com.fc.app.service.RefStaticDataService;
 import com.fc.app.service.RefVenueDetailsService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -35,7 +36,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
 @RequestMapping("/referential")
-
+@Api(tags={ "referential" }, description="Operations pertaining to fabchef referentials")
 public class ReferentialController {
 
 	@Autowired

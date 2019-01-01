@@ -42,4 +42,10 @@ public class RefChefSlotServiceImpl implements RefChefSlotService {
 		return repo.saveAll(chefSlotList);
 	}
 
+
+	@Override
+	public RefChefSlot getRefChefSlotBySlotId(Long slotId) {
+		return repo.findBySlotId(slotId);
+	}
+
 }
